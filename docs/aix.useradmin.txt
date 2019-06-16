@@ -1,0 +1,12 @@
+DEMO: Documentation file for AIX
+
+These are various commands that you can use for user administration under AIX:
+
+useradd
+userdel
+usermod
+lsuser
+mkuser
+chuser
+rmuser
+usrck

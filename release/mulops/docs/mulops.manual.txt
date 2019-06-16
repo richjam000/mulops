@@ -1,0 +1,173 @@
+NAME
+     mulops - Multi Operating System tool
+              Simple consistent commands..
+
+AUTHOR
+     Richard.Jamieson@scsuk.net
+
+DESCRIPTION
+     Different operating systems have different ways of doing the same thing.
+     ( eg: showing total amount of system memory ).
+     This tool aims to help to provide a consistent way to do the same things
+     across multiple operating systems.
+     The tool can be used for one-off commands, to create portable system
+     programs, or just for education
+
+USAGE
+     Documented in mulops.usage.doc
+     You can use mulops to view the usage documenation - simply type:
+		mulops usage.doc
+
+INSTALLATION
+     Documented in mulops.README.doc
+     You can use mulops to view the usage documenation - simply type:
+                mulops readme.doc
+
+CONFIGURATION
+     MULOPS-COMMANDS:
+     To add new commands to mulops simply create yourself a new catalog.
+     Follow the pattern of the examples, provided with the product.
+     Example catalog shown below.
+     Default directory for the catalogs directory is "catalogs".
+     If you dont want to use the default directory you can specify the catalog
+     space separated ) names via the MULOPS_CATALOGS variable. 
+     Catalog names can be specified as 
+               a) full PATH-name of the catalog
+     and/or:   b) URL of a catalog  ( eg: http://www.mulops.com/catalogs/mulcat.default.json ).
+
+     If you think your new catalog entries will be of use to others please
+     let me know and I will add then to the default catalog, or make them
+     available at http://www.mulops.com/catalogs.
+
+     MULOPS-GROUPS
+     MULOPS-GROUPS are groups of MULOPS-COMMANDS.
+     Using groups allows you run mulops across groups of commands.
+     Groups can be specified using the "-g" flag ( see "mulops usage.doc" )
+     Groups are configured using the "mulgroup.default.json" file residing in the
+     "catalogs" directory.
+
+JSON for MULOPS-COMMANDS ( AKA the CATALOGS )
+     Some catalogs are supplied with the release - see the "catalogs" directory.
+     Catalogs can also be sourced via http - eg: see http://www.mulops.com/catalogs
+
+     Sample catalog file:
+     {
+       "$catalog": "default-extract",
+       "author": "Richard.Jamieson@scsuk.net",
+       "catalog-description": "Default-extract mulops catalog",
+       "catalog-version": "2.2",
+       "mulops-commands": {
+          "dnslookup": {
+             "description":         "DNS lookup tool (demo: same for all OS)",
+             "variations": [
+                { "oscommand":      "nslookup"
+                }
+             ]
+          },
+       "listsoft": {
+             "description":         "List installed software",
+             "variations": [
+                { "ostype":         [ "eq","unix_solaris"],
+                  "osversion":      [ "eq","5.11" ],
+                  "oscommand":      "/usr/bin/pkg list"
+                },
+                {
+                  "ostype":         [ "eq","unix_solaris" ],
+                  "oscommand":      "/usr/bin/pkginfo"
+                },
+                {
+                  "ostype":         [ "eq","unix_aix" ],
+                  "oscommand":      "lslpp -L"
+                },
+                {
+                  "ostype":         [ "=~","ubuntu|debian" ],
+                  "oscommand":      "dpkg --get-selections"
+                },
+                {
+                  "baseostype":     [ "eq","linux" ],
+                  "oscommand":      "rpm -qa"
+                }
+             ]
+          }
+       }
+     }
+
+     CATALOG: Valid "field selector" operators :
+                a)  Numeric         (==,!=,<,>,<=,>=)
+                b)  String          (eq,ne,lt,gt,le,ge)
+                c)  RegEx           (=~) - ie : "match"
+
+
+JSON for MULOPS-GROUPS
+     Example of groups configuration:
+     mulgroup.default.json
+     {
+        "mulgroup": "default",
+        "author": "Richard.Jamieson_scsuk.net",
+        "mulgroup-description": "default groups, supplied with mulops",
+        "mulgroup-version": "4.1",
+        "mulgroups": {
+           "mulops": {
+              "description": "Mulops",
+              "group":       [ "usage.doc", "manual.doc", "readme.doc" ]
+           },
+           "server": {
+              "description": "Server Attributes",
+              "group":       [ "model", "memTotalK", "numcpus", "procspeedMhz", "hardware" ]
+           },
+           "proc": {
+              "description": "Processes",
+              "group":       [ "services", "processes" ]
+           }
+        }
+     }
+
+
+
+SUPPORT DOCS
+     Some support-docs are supplied with the release - see the "docs" directory.
+     mulops catalog entries should be set-up to allow easy viewing of the docs,
+     eg "mulops readme" will display suport doc "mulops.README.doc".
+     Default directory for the docs directory is "docs".
+     If you think any new documents that you create will be of use to others please
+     let me know and I will add them to the release, or make them
+     available at http://www.mulops.com/docs
+
+SUPPORT SCRIPTS
+     Sometimes it make be impractical/impossible to code operating-system commands you wish 
+     add to the mulops catalog in a one liner - in which case you will need to create a 
+     "support script" and configure mulops to run that script instead.
+     Mulops will allow you to write and call a separate script for each os/osversion, but still
+     call the script in the same way on each os/osversion.
+     Two support scripts are supplied with the product "linux.distro" and "linux.version".
+     default directory for support-scripts is "bin".
+     
+	
+MODELS
+     "models" allow you to simulate different environments to see what commands mulops would
+     run in those environments.
+     "models" are defined in in model-files contained the the "models" directory.
+     Some default model-files are supplied - but you can create you own
+     If you think any new models that you create will be of use to others please
+     let me know and I will add them to the release, or make them
+     available at http://www.mulops.com/models
+
+     Sample model file:	model.windows10.json
+
+     {
+      	"baseostype": {
+        	"execute":       "Windows"
+   	},
+   	"distro": {
+        	"execute":       "Microsoft"
+   	},
+   	"ostype": {
+        	"execute":       "Microsoft Windows 10"
+   	},
+   	"osversion": {
+        	"execute":       "10.0.10586"
+   	}
+     }
+
+
+

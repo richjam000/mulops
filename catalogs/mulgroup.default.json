@@ -1,0 +1,45 @@
+{
+   "mulgroup": "default",
+   "author": "Richard.Jamieson_scsuk.net",
+   "mulgroup-description": "default groups, supplied with mulops",
+   "mulgroup-version": "4.1",
+   "mulgroups": {
+      "mulops": {
+         "description":	"Mulops",
+         "group": 	[ "usage.doc", "manual.doc", "readme.doc" ]
+      },
+      "server": {
+         "description":	"Server Attributes",
+         "group":	[ "model", "memTotalK", "numcpus", "procspeedMhz", "hardware", "cpubits" ]
+      },
+      "perf": {
+         "description":	"Performance",
+         "group":	[ "memusedpc", "cpuusedpc", "memtop5", "cputop5", "usercpu", "usermem", "usernum", "workcpu", "workmem", "worknum" ]
+      },
+      "os": {
+         "description":	"Operating System",
+         "group":	[ "baseostype", "ostype", "osversion", "kernelver", "distro", "container", "osbits" ]
+      },
+      "sec": {
+         "description":	"Security",
+         "group":	[ "firewall-rules", "firewall-status", "portslisten" ]
+      },
+      "net": {
+         "description":	"Networking",
+         "group":	[ "nicstate", "portslisten", "myip", "myips", "defaultrouter" ]
+      },
+      "proc": {
+         "description":	"Processes",
+         "group":	[ "services", "processes" ]
+      },
+      "mon": {
+         "description":	"Monitoring",
+         "group":	[ "syserrlog20" ]
+      },
+      "soft": {
+         "description":	"Software",
+         "group":	[ "listsoft" ]
+      }
+   }
+}
+

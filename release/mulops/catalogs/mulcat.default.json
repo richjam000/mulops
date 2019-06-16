@@ -1,0 +1,568 @@
+{
+   "catalog": "default",
+   "author": "Richard.Jamieson_scsuk.net",
+   "catalog-description": "default catalog, supplied with mulops",
+   "catalog-version": "4.1",
+   "mulops-commands": {
+      "manual.doc": {
+         "description":         "mulops manual",
+         "variations": [
+            { "oscommand":      "mulops.manual.txt"
+            }
+         ]
+      },
+      "usage.doc": {
+         "description":         "mulops usage doc",
+         "variations": [
+            { "oscommand":      "mulops.usage.txt"
+            }
+         ]
+      },
+      "readme.doc": {
+         "description":         "mulops README doc",
+         "variations": [
+            { "oscommand":      "mulops.README.txt"
+            }
+         ]
+      },
+      "distro": {
+         "description":         "Operating System distribution name",
+         "variations": [
+            { "oscommand":      "linux.distro",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo Oracle",
+              "baseostype":      [ "eq","solaris"]
+            },
+            { "oscommand":      "echo IBM",
+              "baseostype":      [ "eq","aix"]
+            },
+            { "oscommand":      "echo HP",
+              "baseostype":      [ "eq","hpux"]
+            },
+            { "oscommand":      "echo Microsoft",
+              "baseostype":     [ "eq","Windows"]
+            },
+            { "oscommand":      "echo Distro_Unknown"
+            }
+         ]
+      },
+      "ostype": {
+         "description":         "Operating System type",
+         "variations": [
+            { "oscommand":      "echo unix_linux_suse",
+              "distro":         [ "eq","suse"]
+            },
+            { "oscommand":      "echo unix_linux_ubuntu",
+              "distro":         [ "eq","ubuntu"]
+            },
+            { "oscommand":      "echo unix_linux_debian",
+              "distro":         [ "eq","debian"]
+            },
+            { "oscommand":      "echo unix_linux_centos",
+              "distro":         [ "eq","centos"]
+            },
+            { "oscommand":      "echo unix_solaris",
+              "baseostype":     [ "=~","sunos|solaris"]
+            },
+            { "oscommand":      "echo unix_hpux",
+              "baseostype":     [ "eq","hpux"]
+            },
+            { "oscommand":      "echo unix_aix",
+              "baseostype":     [ "eq","aix"]
+            },
+            { "oscommand":      "for /f delims^=^=^ tokens^=2 %G in ('wmic OS get Caption /format:list') do @echo %G",
+              "baseostype":     [ "eq","Windows"]
+            }
+         ]
+      },
+      "osversion": {
+         "description":         "Operating System version",
+         "variations": [
+            { "oscommand":      "linux.version",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "oslevel",
+              "baseostype":      [ "eq","aix"]
+            },
+            { "oscommand":      "uname -rv",
+              "baseostype":      [ "eq","solaris"]
+            },
+            { "oscommand":      "for /f delims^=^=^ tokens^=2 %G in ('wmic OS get version/format:list') do @echo %G",
+              "baseostype":     [ "eq","Windows"]
+            },
+            { "oscommand":      "uname -v"
+            }
+         ]
+      },
+      "firewall-rules": {
+         "description":         "Show firewall configuration",
+         "variations": [
+            { "oscommand":      "/sbin/iptables -L -n",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^6"]
+            },
+            { "oscommand":      "firewall-cmd --list-all",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^7"]
+            },
+            { "oscommand":      "sudo ufw status verbose",
+              "distro":         [ "eq","ubuntu" ]
+            },
+            { "oscommand":      "sudo /usr/sbin/ipfstat -io",
+              "baseostype":     [ "eq","solaris" ]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "netsh advfirewall firewall show rule name=all"
+            }
+         ]
+      },
+      "firewall-status": {
+         "description":         "Show firewall status",
+         "variations": [
+            { "oscommand":      "/sbin/service iptables status",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^6"]
+            },
+            { "oscommand":      "firewall-cmd --state",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^7"]
+            },
+            { "oscommand":      "sudo ufw status verbose",
+              "distro":         [ "eq","ubuntu" ]
+            },
+            { "oscommand":      "svcs -o state ipfilter",
+              "baseostype":     [ "eq","solaris" ]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "netsh advfirewall show allprofiles"
+            }
+         ]
+      },
+      "nicstate": {
+         "description":         "Status of Network Interface Cards (state/speed/duplex)",
+         "variations": [
+            { "oscommand":      "cd /sys/class/net ; for INT in * ; do printf \"%-10s : \" $INT; cat $INT/operstate $INT/speed $INT/duplex 2>/dev/null | xargs echo; done",
+              "baseostype":     [ "eq","linux" ]
+            },
+            { "oscommand":      "cd /sys/class/net ; for INT in * ; do printf \"%-10s : \" $INT; cat $INT/operstate $INT/speed $INT/duplex 2>/dev/null | xargs echo; done",
+              "baseostype":     [ "eq","linux" ]
+            },
+            { "oscommand":      "/usr/sbin/dladm show-phys",
+              "osversion":      [ "=~","^5.11"],
+              "baseostype":     [ "eq","solaris" ]
+            },
+            { "oscommand":      "/usr/sbin/dladm show-dev",
+              "baseostype":     [ "eq","solaris" ]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "wmic NIC get name, speed, netconnectionstatus, manufacturer, macaddress | find /v \"\""
+            }
+         ]
+      },
+      "memTotalK": {
+         "description":         "Amount of installed memory (kB)",
+         "variations": [
+            { "baseostype":     [ "eq","linux" ],
+              "oscommand":      "cat /proc/meminfo | grep MemTotal | cut -d ' ' -f2- | awk '{print $1}'"
+            },
+            {
+              "baseostype":     [ "eq","solaris" ],
+              "oscommand":      "/usr/sbin/prtconf | grep \"Memory size:\" | awk '{ print $3 * 1024 }'"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell.exe \"get-ciminstance -class CIM_ComputerSystem | % {$_.TotalPhysicalMemory/1024}\""
+            }
+         ]
+      },
+      "model": {
+         "description":         "Model of server",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "/usr/sbin/prtdiag | grep \"System Configuration\" | awk '{print $NF}'"
+            },
+            { "baseostype":     [ "eq","aix"],
+              "oscommand":      "uname -M | cut -d ',' -f2-"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "model | cut -d '/' -f 3"
+            },
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "cat /sys/devices/virtual/dmi/id/product_name"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell.exe \"get-cimInstance CIM_ComputerSystem | % {$_.Manufacturer + ' ' + $_.Model}\""
+            }
+         ]
+      },
+      "container": {
+         "description":         "Container type. eg: Docker, OracleVirtualbox, SolarisZone",
+         "variations": [
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "(( [ -f /.dockerenv ] && echo Docker ) || ( [ `cat /sys/devices/virtual/dmi/id/product_name` = VirtualBox ] && echo OracleVirtualBox ) || ( [ `cat /sys/devices/virtual/dmi/id/product_name` = KVM ] && echo KVM ) || echo no)"
+            }
+         ]
+      },
+      "numcpus": {
+         "description":         "Number of CPUs allocated to server",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "/usr/sbin/psrinfo -v | grep \"processor operates at\" | wc -l | awk '{print $1}'"
+            },
+            { "baseostype":     [ "eq","aix"],
+              "oscommand":      "lsdev -Cc processor | wc -l | awk '{print $1}'"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "/sbin/ioscan -k | grep proc | wc -l"
+            },
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "cat /proc/cpuinfo | grep ^processor | wc -l"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "for /f delims^=^=^ tokens^=2 %G in ('wmic ComputerSystem get NumberOfProcessors /format:list') do @echo %G"
+            }
+         ]
+      },
+      "procspeedMhz": {
+         "description":         "Speed of CPUs",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "/usr/sbin/psrinfo -v | grep \"processor operates at\" | head -1 | awk '{print $(NF -1)}'"
+            },
+            { "baseostype":     [ "eq","aix"],
+              "oscommand":      "prtconf -s | cut -d ' ' -f4-"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "echo $(echo itick_per_usec/D | adb -k /stand/vmunix /dev/mem | tail -1 | awk '{print $2}')"
+            },
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "cat /proc/cpuinfo | grep \"cpu MHz\" | awk '{print $NF}' | head -1"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell.exe \"get-ciminstance -class CIM_Processor | % {$_.MaxClockSpeed}\""
+            }
+         ]
+      },
+      "services": {
+         "description":         "List services and status",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "svcs -a"
+            },
+            { "baseostype":     [ "eq","aix"],
+              "oscommand":      "lssrc -a"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "ps -ef | grep root"
+            },
+            {
+              "oscommand":      "systemctl -a",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^7"]
+            },
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "/sbin/service --status-all"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "wmic service get name,caption,state,startmode,pathname | find /v \"\""
+            }
+         ]
+      },
+      "syserrlog20": {
+         "description":         "Show last 20 lines of system error log",
+         "variations": [
+            { "ostype":         [ "eq","unix_linux_ubuntu"],
+              "oscommand":      "tail -20 /var/log/syslog"
+            },
+            { "baseostype":     [ "eq","linux"],
+              "oscommand":      "tail -20 /var/log/messages"
+            },
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "tail -20 /var/adm/messages"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "tail -20 /var/adm/syslog/syslog.log"
+            },
+            {
+              "baseostype":     [ "eq","aix" ],
+              "oscommand":      "errpt | tail -20"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell Get-Eventlog system -newest 20"
+            }
+         ]
+      },
+      "hardware": {
+         "description":         "Show hardware",
+         "variations": [
+            { "baseostype":     [ "eq","linux"],
+              "oscommand":      "lshw"
+            },
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "/usr/sbin/prtdiag"
+            },
+            { "baseostype":     [ "eq","hpux"],
+              "oscommand":      "ioscan"
+            },
+            {
+              "baseostype":     [ "eq","aix" ],
+              "oscommand":      "lscfg"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "wmic onboarddevice get description, devicetype, enabled, status | find /v \"\""
+            }
+         ]
+      },
+      "listsoft": {
+         "description":         "List installed software",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "osversion":      [ "=~","^5.11" ],
+              "oscommand":      "/usr/bin/pkg list"
+            },
+            {
+              "baseostype":     [ "eq","solaris" ],
+              "oscommand":      "/usr/bin/pkginfo"
+            },
+            {
+              "baseostype":     [ "eq","aix" ],
+              "oscommand":      "lslpp -L"
+            },
+            {
+              "baseostype":     [ "eq","hpux" ],
+              "osversion":      [ "=~","10" ],
+              "oscommand":      "swlist -l product PH*"
+            },
+            {
+              "baseostype":     [ "eq","hpux" ],
+              "osversion":      [ "=~","^11" ],
+              "oscommand":      "swlist -l patch"
+            },
+            {
+              "ostype":         [ "=~","ubuntu|debian" ],
+              "oscommand":      "dpkg --get-selections"
+            },
+            {
+              "baseostype":     [ "eq","linux" ],
+              "oscommand":      "rpm -qa"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "wmic product get caption, version, installdate, installlocation | find /v \"\""
+            }
+         ]
+      },
+      "kernelver": {
+         "description":         "Show Kernel version",
+         "variations": [
+            { "baseostype":     [ "eq","solaris"],
+              "osversion":      [ "=~","^5.11" ],
+              "oscommand":      "pkg info system/kernel | awk '/Branch/{print $NF}'"
+            },
+            { "baseostype":     [ "eq","solaris"],
+              "oscommand":      "uname -v"
+            },
+            { "baseostype":     [ "eq","linux"],
+              "oscommand":      "uname -rv"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "osversion":      [ "=~","^10|^8" ],
+              "oscommand":      "echo Windows NT Kernel"
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "echo Windows 9x Kernel"
+            },
+            { "oscommand":      "echo Unknown"
+            }
+         ]
+      },
+      "processes": {
+         "description":         "Long listing of running processes",
+         "variations": [
+            { "oscommand":      "ps aux",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "ps -eo user,pid,pcpu,pmem,vsz,rss,tty,s,stime,time,args",
+              "baseostype":      [ "eq","solaris"]
+            },
+            { "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort CPU -des | ft -AutoSize\"",
+              "baseostype":      [ "eq","Windows"]
+            }
+         ]
+      },
+      "memusedpc": {
+         "description":         "Memory % used",
+         "variations": [
+            { "oscommand":      "free -km | awk '/Mem:/{printf \"%.0f\\n\", $3 / $2 * 100 }'",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "ps -eo pmem | awk 'NR>1 {tpmem=tpmem+$1 }END {printf \"%2.2f\\n\", tpmem}'",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell.exe \"get-WmiObject win32_Operatingsystem | % {[math]::Round(($_.TotalVisibleMemorySize - $_.freePhysicalMemory) / $_.TotalVisibleMemorySize * 100,2)}"
+            }
+         ]
+      },
+      "cpuusedpc": {
+         "description":         "CPU % used",
+         "variations": [
+            { "oscommand":      "vmstat  1 2 | tail -1 | awk '{print 100 - $(NF -2)}'",
+              "baseostype":     [ "eq","linux"]
+            },
+            { "oscommand":      "vmstat  1 2 | tail -1 | awk '{print 100 - $NF}'",
+              "baseostype":     [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "for /f delims^=^=^ tokens^=2 %G in ('wmic cpu get loadpercentage /format:list') do @echo %G"
+            }
+         ]
+      },
+      "memtop5": {
+         "description":         "Memory top 5 processes, % used",
+         "variations": [
+            { "oscommand":      "ps aux --sort=-%mem | head -5",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo '    USER   PID %CPU %MEM  VSZ  RSS TT      S    STIME        TIME COMMAND';ps -eo user,pid,pcpu,pmem,vsz,rss,tty,s,stime,time,args | awk 'NR >1' | sort -nrk4 | head -5",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort VM -des | select -first 5 | ft -AutoSize\""
+            }
+         ]
+      },
+      "cputop5": {
+         "description":         "CPU top 5 processes, % used",
+         "variations": [
+            { "oscommand":      "ps aux --sort=-%cpu | head -5",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo '    USER   PID %CPU %MEM  VSZ  RSS TT      S    STIME        TIME COMMAND';ps -eo user,pid,pcpu,pmem,vsz,rss,tty,s,stime,time,args | awk 'NR >1' | sort -nrk3 | head -5",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort CPU -des | select -first 5 | ft -AutoSize\""
+            }
+         ]
+      },
+      "usercpu": {
+         "description":         "User process summary (user, %cpu, $mem, count) - sorted by cpu",
+         "variations": [
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,%cpu,%mem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk2",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,pcpu,pmem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk2",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort Owner,CPU -des | ft -AutoSize\""
+            }
+         ]
+      },
+      "usermem": {
+         "description":         "User process summary (user, %cpu, $mem, count) - sorted by mem",
+         "variations": [
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,%cpu,%mem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk3",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,pcpu,pmem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk3",
+              "baseostype":      [ "eq","solaris"]
+            },
+            { "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort Owner,VM -des | ft -AutoSize\"",
+              "baseostype":      [ "eq","Windows"]
+            }
+         ]
+      },
+      "usernum": {
+         "description":         "User process summary (user, %cpu, $mem, count) - sorted by number of processes",
+         "variations": [
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,%cpu,%mem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk4",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'USER          %CPU    %MEM   COUNT'; ps -eo user,pcpu,pmem |  awk 'NR>1 {users[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (user in users) {tcpu=tcpu+cpu[user];tmem=tmem+mem[user];printf \"%-10s %7.2f %7.2f %7d\\n\",user,cpu[user],mem[user],users[user]} printf \"%-10s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk4",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | group Owner | select Name, count | ft -AutoSize\""
+            }
+         ]
+      },
+      "workcpu": {
+         "description":         "Process summary (user, %cpu, $mem, count) - sorted by cpu",
+         "variations": [
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,%cpu,%mem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk2",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,pcpu,pmem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk2",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort ProcessName,CPU -des | ft -AutoSize\""
+            }
+         ]
+      },
+      "workmem": {
+         "description":         "Process summary (user, %cpu, $mem, count) - sorted by mem",
+         "variations": [
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,%cpu,%mem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk3",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,pcpu,pmem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk3",
+              "baseostype":      [ "eq","solaris"]
+            },
+            { "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | sort ProcessName,VM -des | ft -AutoSize\"",
+              "baseostype":      [ "eq","Windows"]
+            }
+         ]
+      },
+      "worknum": {
+         "description":         "Process summary (user, %cpu, $mem, count) - sorted by number of processes",
+         "variations": [
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,%cpu,%mem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk4",
+              "baseostype":      [ "eq","linux"]
+            },
+            { "oscommand":      "echo 'COMMAND                                     %CPU    %MEM   COUNT' ; ps -eo comm,pcpu,pmem |  awk 'NR>1 {comms[$1]++; cpu[$1]=cpu[$1]+$2 ; mem[$1]=mem[$1]+$3 ; tnum++ }END{for (comm in comms) {tcpu=tcpu+cpu[comm];tmem=tmem+mem[comm];printf \"%-40s %7.2f %7.2f %7d\\n\",comm,cpu[comm],mem[comm],comms[comm]} printf \"%-40s %7.2f %7.2f %7d\\n\", \"TOTAL\",tcpu,tmem,tnum}' | sort -rnk4",
+              "baseostype":      [ "eq","solaris"]
+            },
+            {
+              "baseostype":     [ "eq","Windows" ],
+              "oscommand":      "powershell \"$owners = @{} ; gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user} ; get-process | select Id,processname,@{l='Owner';e={$owners[$_.id.tostring()]}},cpu,vm,pm,npm,ws,handles | group processname | select Name, count | sort count | ft -AutoSize\""
+            }
+         ]
+      },
+      "portslisten": {
+         "description":         "Which ports is server listening on",
+         "variations": [
+            { "oscommand":      "ss -tap state listening",
+              "distro":         [ "eq","centos" ],
+              "osversion":      [ "=~","^7"]
+            }
+         ]
+      }
+   }
+}

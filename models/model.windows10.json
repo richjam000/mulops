@@ -1,0 +1,14 @@
+{
+   "baseostype": { 
+	"execute": 	"windows"
+   },
+   "distro": {
+	"execute":	"Microsoft"
+   },
+   "ostype": {
+	"execute":	"Microsoft Windows 10"
+   },
+   "osversion":	{
+	"execute":	"10.0.10586"
+   }
+}

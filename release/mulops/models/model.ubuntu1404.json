@@ -1,0 +1,14 @@
+{
+   "baseostype": { 
+	"execute": 	"linux"
+   },
+   "distro": {
+	"execute":	"ubuntu"
+   },
+   "ostype": {
+	"execute":	"unix_linux_ubuntu"
+   },
+   "osversion":	{
+	"execute":	"14.04"
+   }
+}

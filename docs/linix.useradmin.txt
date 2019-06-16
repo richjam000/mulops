@@ -1,0 +1,10 @@
+DEMO: Documentation file for Linux
+
+These are various commands that you can use for user administration under Linux:
+
+useradd
+usermod
+userdel
+adduser
+chage 
+getent

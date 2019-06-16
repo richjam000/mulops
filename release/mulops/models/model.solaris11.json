@@ -1,0 +1,17 @@
+{
+   "baseostype": { 
+	"execute": 	"solaris"
+   },
+   "distro": {
+	"execute":	"Oracle"
+   },
+   "ostype": {
+	"execute":	"unix_solaris"
+   },
+   "osversion":	{
+	"execute":	"5.11"
+   },
+   "model":	{
+	"execute":	"VirtualBox"
+   }
+}

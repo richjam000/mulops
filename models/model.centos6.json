@@ -1,0 +1,17 @@
+{
+   "baseostype": { 
+	"execute": 	"linux"
+   },
+   "distro": {
+	"execute":	"centos"
+   },
+   "ostype": {
+	"execute":	"unix_linux_centos"
+   },
+   "osversion":	{
+	"execute":	"6"
+   },
+   "model":	{
+	"execute":	"VirtualBox"
+   }
+}

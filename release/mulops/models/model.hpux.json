@@ -1,0 +1,17 @@
+{
+   "baseostype": { 
+	"execute": 	"hpux"
+   },
+   "distro": {
+	"execute":	"HP"
+   },
+   "ostype": {
+	"execute":	"unix_hpux"
+   },
+   "osversion":	{
+	"execute":	"ANY"
+   },
+   "model":	{
+	"execute":	"VirtualBox"
+   }
+}
