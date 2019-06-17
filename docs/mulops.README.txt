@@ -6,8 +6,7 @@ Date:                   17th June 2019
 Code language:          perl
 Catalogue format:       JSON
 
-Description:
-See Specification:      https://gitlab.scsuk.net/rich/mulops/wikis/Mulops-Functional-Specification
+Description:		https://gitlab.scsuk.net/rich/mulops/wikis/home
 Tested on:              Oracle-Virtualbox VMs = centos, ubuntu, solaris,
                         and Windows10
 			Physical-Server = Redhat-7.
