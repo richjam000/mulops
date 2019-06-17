@@ -59,6 +59,9 @@
             { "oscommand":      "echo unix_linux_debian",
               "distro":         [ "eq","debian"]
             },
+            { "oscommand":      "echo unix_linux_redhat",
+              "distro":         [ "eq","redhat"]
+            },
             { "oscommand":      "echo unix_linux_centos",
               "distro":         [ "eq","centos"]
             },
@@ -99,6 +102,14 @@
          "description":         "Show firewall configuration",
          "variations": [
             { "oscommand":      "/sbin/iptables -L -n",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^6"]
+            },
+            { "oscommand":      "firewall-cmd --list-all",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^7"]
+            },
+            { "oscommand":      "/sbin/iptables -L -n",
               "distro":         [ "eq","centos" ],
               "osversion":      [ "=~","^6"]
             },
@@ -121,6 +132,14 @@
       "firewall-status": {
          "description":         "Show firewall status",
          "variations": [
+            { "oscommand":      "/sbin/service iptables status",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^6"]
+            },
+            { "oscommand":      "firewall-cmd --state",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^7"]
+            },
             { "oscommand":      "/sbin/service iptables status",
               "distro":         [ "eq","centos" ],
               "osversion":      [ "=~","^6"]
@@ -276,6 +295,11 @@
             },
             { "baseostype":     [ "eq","hpux"],
               "oscommand":      "ps -ef | grep root"
+            },
+            {
+              "oscommand":      "systemctl -a",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^7"]
             },
             {
               "oscommand":      "systemctl -a",
@@ -570,6 +594,13 @@
          "description":         "Which ports is server listening on",
          "variations": [
             { "oscommand":      "ss -tap state listening",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^7"]
+            },
+            { "oscommand":      "netstat -anp | egrep 'Proto|LISTEN'",
+              "distro":         [ "eq","redhat" ]
+            },
+            { "oscommand":      "ss -tap state listening",
               "distro":         [ "eq","centos" ],
               "osversion":      [ "=~","^7"]
             },
@@ -604,6 +635,13 @@
          "description":         "What IP addresses are configured on this server",
          "variations": [
             { "oscommand":      "ip address",
+              "distro":         [ "eq","redhat" ],
+              "osversion":      [ "=~","^7"]
+            },
+            { "oscommand":      "/sbin/ifconfig -a",
+              "distro":         [ "eq","redhat" ]
+            },
+            { "oscommand":      "ip address",
               "distro":         [ "eq","centos" ],
               "osversion":      [ "=~","^7"]
             },
@@ -621,6 +659,9 @@
       "defaultrouter": {
          "description":         "What IP addresses are configured on this server",
          "variations": [
+            { "oscommand":      "/sbin/ip route | grep ^'default ' | awk '{print $3}'",
+              "distro":         [ "eq","redhat" ]
+            },
             { "oscommand":      "/sbin/ip route | grep ^'default ' | awk '{print $3}'",
               "distro":         [ "eq","centos" ]
             },
