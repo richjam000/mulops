@@ -131,7 +131,7 @@ sub mulops {
    #print "Processed all catalogs and not found $mulops_command_arg \n";
    return if $mulops_command_arg eq 'all' ;
  
-   my $NoValues = 'NoValues (Please email Richard.Jamieson@scsuk.net, if you can fill in the blanks)';
+   my $NoValues = 'NoValues (Please email Richard.Jamieson at scsuk.net, if you can fill in the blanks)';
    $mulops_output_cache->{$mulops_command_arg}->{execute} = "$NoValues" if ! defined($mulops_output_cache->{$mulops_command_arg}->{execute}) ;
    $mulops_output_cache->{$mulops_command_arg}->{exit_status} = 'fail' if ! defined($mulops_output_cache->{$mulops_command_arg}->{exit_status});
    $mulops_output_cache->{$mulops_command_arg}->{oscommand} = "$NoValues" if ! defined($mulops_output_cache->{$mulops_command_arg}->{oscommand}) ;
