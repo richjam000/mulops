@@ -1,15 +1,17 @@
 README
 
 Product:                mulops
-Release:                4.4
-Date:                   6th July 2016
+Release:                5.0
+Date:                   17th June 2019
 Code language:          perl
 Catalogue format:       JSON
 
 Description:
-See Specification:      https://sourceforge.net/projects/mulops/files
+See Specification:      https://gitlab.scsuk.net/rich/mulops/wikis/Mulops-Functional-Specification
 Tested on:              Oracle-Virtualbox VMs = centos, ubuntu, solaris,
                         and Windows10
+			Physical-Server = Redhat-7.
+			Docker-Container = Redhat-7.
                         Check with: "mulops teststatus"
 Please Feedback to:     https://sourceforge.net/projects/mulops
                         Or email Richard.Jamieson@scsuk.net
@@ -33,6 +35,32 @@ INSTALL:
         eg:     cd $HOME
                 gunzip mulops_4.2.tar.gz
                 tar xvf mulops_4.2.tar
+	or:	cd $HOME
+		curl --insecure https://gitlab.scsuk.net/rich/mulops/-/archive/master/mulops-master.tar.gz | tar xzvf -
+
+WEBSITE-INSTALL:
+   Should you wish to set-up a local website - similar to www.mulops.com
+
+   i)	Your install location will be in a cgi-bin directory - eg: /var/www/cgi-bin
+
+   ii)  Unzip and untar the release - as per above
+
+   iii) Create a mulops directory under your html tree - eg: mkdir /var/www/html/mulops
+
+   iv)  In that directory..
+	a) Create a index.html file - that redirect to the mulops cgi.
+	   <meta http-equiv="refresh" content="0; URL='http://www.{whatever}.com/cgi-bin/mulops/bin/mulops.cgi'" />
+	b) Create symbolic links to the mulops "docs" and "catalogs" directories
+	   eg:  ln -s ../cgi-bin/mulops/catalogs ; ../cgi-bin/mulops/docs
+
+   v)   Allow indexing on the "docs" and "catalogs" directories
+	eg:	# cat /etc/httpd/conf.d/mulops_http.conf
+		<Directory "/var/www/cgi-bin/mulops/catalogs">
+    			Options Indexes
+		</Directory>
+		<Directory "/var/www/cgi-bin/mulops/docs">
+    			Options Indexes
+		</Directory>
 
 CONFIGURE:
 
@@ -171,4 +199,8 @@ ii)	Added display-only code for docs.
 iii)    Created meaningful return codes.
 	Failed single command will exit with exit-code = "1".
         Multiple failues will have and exit code equal to the number of failures.
+---------------------------------------------------------------------------------
+5.0 Update 17/6/2019
+i)	Added Redhat support
+ii)	Updated website configuration documentation - in case others want thier own www.mulops.com
 ---------------------------------------------------------------------------------

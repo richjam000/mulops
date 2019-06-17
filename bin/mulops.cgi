@@ -176,7 +176,7 @@ sub print_prompt {
    print '<a href=/docs><button type="button">Docs</button></a>';
    
    print popup_menu(-name=>'model',
-                  -values=>[qw/windows10 ubuntu14 centos6 centos7 solaris10 solaris11 aix hpux/],
+                  -values=>[qw/windows10 ubuntu14 redhat6 redhat7 centos6 centos7 solaris10 solaris11 aix hpux/],
                   -Onchange=>"this.form.submit()",
                   -default=>'solaris11');
 
