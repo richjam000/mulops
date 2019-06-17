@@ -1,0 +1,17 @@
+{
+   "baseostype": { 
+	"execute": 	"linux"
+   },
+   "distro": {
+	"execute":	"redhat"
+   },
+   "ostype": {
+	"execute":	"unix_linux_redhat"
+   },
+   "osversion":	{
+	"execute":	"6"
+   },
+   "model":	{
+	"execute":	"VirtualBox"
+   }
+}
