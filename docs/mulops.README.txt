@@ -49,7 +49,7 @@ WEBSITE-INSTALL:
    iv)  In that directory..
 	a) Create a index.html file - that redirect to the mulops cgi.
 	   <meta http-equiv="refresh" content="0; URL='http://www.{whatever}.com/cgi-bin/mulops/bin/mulops.cgi'" />
-	b) Create symbolic links to the mulops "catalogs" directory
+	b) Create symbolic a link to the mulops "catalogs" directory
 	   eg:  ln -s ../cgi-bin/mulops/catalogs 
 
    v)   Allow indexing on the "catalogs" directory
