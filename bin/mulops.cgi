@@ -174,7 +174,6 @@ sub print_prompt {
    print '<a href=https://gitlab.scsuk.net/rich/mulops/wikis/home/><button type="button">Wiki</button></a>';
    print '<a href=https://gitlab.scsuk.net/rich/mulops/wikis/Get-Mulops><button type="button">Get Mulops</button></a>';
    print '<a href=/catalogs><button type="button">Catalogs</button></a>';
-   print '<a href=/docs><button type="button">Docs</button></a>';
    
    print popup_menu(-name=>'model',
                   -values=>[qw/windows10 ubuntu14 redhat6 redhat7 centos6 centos7 solaris10 solaris11 aix hpux/],
