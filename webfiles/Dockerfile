@@ -6,4 +6,4 @@ RUN systemctl enable httpd
 COPY . /var/www/cgi-bin/mulops
 COPY webfiles/mulops_http.conf /etc/httpd/conf.d/
 COPY webfiles/index.html /var/www/html
-RUN ln -s /var/www/cgi-bin/mulops/catalog /var/www/html
+RUN ln -s /var/www/cgi-bin/mulops/catalogs /var/www/html
