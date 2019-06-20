@@ -1,5 +1,5 @@
 # Dockerfile  - for a mulops website, like www.mulops.com
-# I use: docker build -t localhost:5000/scsuk.net/mulops:1.0 -f webfiles/Dockerfile https://gitlab.scsuk.net/rich/mulops.git
+# I use: docker build -t localhost:5000/scsuk.net/mulops:1.0 -f webfiles/Dockerfile https://gitlab.scsuk.net/rich/mulops.git#master
 FROM registry.access.redhat.com/ubi7-init:7.6-23
 RUN yum -y install httpd perl
 RUN systemctl enable httpd
