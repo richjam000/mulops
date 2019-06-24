@@ -171,8 +171,8 @@ sub print_prompt {
    }
 
    print "<p>";
-   print '<a href=https://gitlab.scsuk.net/rich/mulops/wikis/home/><button type="button">Wiki</button></a>';
-   print '<a href=https://gitlab.scsuk.net/rich/mulops/wikis/Get-Mulops><button type="button">Get Mulops</button></a>';
+   print '<a href=https://gitlab.scsuk.net/scsuk/mulops/wikis/home><button type="button">Wiki</button></a>';
+   print '<a href=https://gitlab.scsuk.net/scsuk/mulops/wikis/Get-Mulops><button type="button">Get Mulops</button></a>';
    print '<a href=/catalogs><button type="button">Catalogs</button></a>';
    
    print popup_menu(-name=>'model',
